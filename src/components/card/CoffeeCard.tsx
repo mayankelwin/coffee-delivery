@@ -22,7 +22,7 @@ export function CoffeeCard({ name, description, tags, price, image }: CoffeeCard
         rounded-tl-xl rounded-tr-[36px] rounded-bl-[36px] rounded-br-xl
         p-5 pt-14
         w-[260px]
-        flex flex-col items-center text-center shadow
+        flex flex-col items-center text-center shadow justify-between
         relative
         mb-3
       "
@@ -34,7 +34,7 @@ export function CoffeeCard({ name, description, tags, price, image }: CoffeeCard
       </div>
 
       {/* TAGS */}
-      <div className="flex gap-2 mb-4 mt-6">
+      <div className="flex gap-2 mb-4 mt-10">
         {tags.map((tag) => (
           <span
             key={tag}
