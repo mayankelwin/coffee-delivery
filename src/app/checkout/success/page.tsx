@@ -7,7 +7,6 @@ import { useCartStore } from "@/src/store/useCartStore";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Loader2 } from "lucide-react";
-import { motion } from "framer-motion";
 import { LoadingDots } from "@/src/components/ui/LoadingDots";
 
 
@@ -39,7 +38,6 @@ export default function CheckoutSuccess() {
 
     setTimeout(() => {
       clearCart();
-      resetLocation();
       router.push("/");
     }, 300);
   }
@@ -61,11 +59,11 @@ export default function CheckoutSuccess() {
             text-yellow-700 border border-yellow-600 
             px-4 py-2 rounded-lg 
             hover:bg-yellow-600 hover:text-white
-            transition duration-300
+            transition duration-300 cursor-pointer
           "
         >
           <ArrowLeft size={20} />
-          Voltar para Home
+          Continuar comprando
         </button>
 
         <main
@@ -127,7 +125,7 @@ export default function CheckoutSuccess() {
             <Image
               src={Motoboy}
               alt="Entregador"
-              className="w-64 md:w-80 lg:w-[380px] h-auto object-contain"
+              className="w-80 md:w-120 lg:w-150 h-auto object-contain"
               priority
             />
           </div>

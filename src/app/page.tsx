@@ -4,26 +4,24 @@ import Image from "next/image";
 import { HeaderGlobal } from "../components/layout/HeaderGlobal";
 import { HeroSection } from "../components/HeroSection";
 import { CoffeeSection } from "../components/CoffeeSection";
-
+import { WelcomeModal } from "../components/modal/WelcomeModal";
 
 export default function Home() {
  
-  
   return (
     <div className="bg-white">
       <div className="max-w-screen-2xl mx-auto px-4 md:px-10 lg:px-20">
-
-       <HeaderGlobal />
-
+        <HeaderGlobal />
         <main className="">
           <HeroSection />
           <CoffeeSection />
         </main>
+        
+        <WelcomeModal />
 
         <footer className="mt-20 border-t border-gray-200 py-10">
           <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10">
             
-            {/* Sobre o Desenvolvedor */}
             <div>
               <h3 className="text-xl font-semibold text-gray-800">Desenvolvido por</h3>
               <p className="text-gray-600 mt-1">Mayan Kelwin</p>
@@ -33,7 +31,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Selos de Segurança apenas teste */}
             <div className="flex flex-col items-center">
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Site Seguro</h3>
               <div className="flex items-center gap-3">
@@ -60,7 +57,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Cartões Aceitos */}
             <div className="flex flex-col items-center md:items-end">
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Formas de Pagamento</h3>
               <div className="flex items-center gap-3">

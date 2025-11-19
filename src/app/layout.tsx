@@ -1,36 +1,37 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { ToastProvider } from "../provider/ToastProvider";
+import type { Metadata } from "next"
+import { Cormorant_Garamond, Inter } from "next/font/google"
+import "./globals.css"
+import { ToastProvider } from "../provider/ToastProvider"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
-});
+  weight: ["300", "400", "500", "600", "700"],
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-});
+})
 
 export const metadata: Metadata = {
   title: "Coffee Delivery",
-  description: "Seu cafe quentinho na palma de sua mão",
-};
+  description: "Seu café quentinho na palma de sua mão",
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="pt-br">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${cormorant.variable} ${inter.variable} antialiased`}
       >
-          <ToastProvider />
+        <ToastProvider />
         {children}
       </body>
     </html>
-  );
+  )
 }

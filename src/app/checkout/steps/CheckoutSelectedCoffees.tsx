@@ -7,23 +7,23 @@ import { useRouter } from "next/navigation";
 import EmptyCart from "../../../../public/svg/coffees/empty-cart.svg";
 import { useEffect, useState } from "react";
 import { useLocationStore } from "@/src/store/useLocationStore";
+import { toast } from "react-toastify";
+import { useOrdersStore } from "@/src/store/useOrdersStore";
 
 export function CheckoutSelectedCoffees() {
   const router = useRouter();
 
   const { cart, updateQuantity, removeFromCart, paymentMethod } = useCartStore();
   const address = useLocationStore((state) => state.address);
+  const addOrder = useOrdersStore((state) => state.addOrder);
 
-  // 🔥 loading de hidratação
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Aguarda 120ms para Zustand hidratar
     const timer = setTimeout(() => setIsLoading(false), 120);
     return () => clearTimeout(timer);
   }, []);
 
-  // Enquanto carrega → só mostra o loading
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-20">
@@ -54,14 +54,10 @@ export function CheckoutSelectedCoffees() {
   const total = subtotal + delivery;
 
   function handleButtonClick() {
-    if (isEmpty) {
-      router.push("/");
-      return;
-    }
-
-    if (canConfirm) {
-      router.push("/checkout/success");
-    }
+    if (!canConfirm) return;
+    addOrder(cart, total);
+    toast.success("Compra realizada com sucesso!", { className: "toast-coffee" });
+    setTimeout(() => router.push("/checkout/success"), 800);
   }
 
   return (
@@ -93,7 +89,12 @@ export function CheckoutSelectedCoffees() {
               <Image src={item.image} width={55} height={55} alt={item.name} />
 
               <div className="flex-1">
+                <div className="flex w-full  justify-between">
                 <p className="font-semibold text-gray-800">{item.name}</p>
+                <span className="font-bold text-gray-800">
+                  R$ {(item.price * item.quantity).toFixed(2)}
+                </span>
+                </div>
 
                 <div className="flex items-center gap-3 mt-3">
                   <div className="flex items-center bg-gray-200 rounded px-2 py-1">
@@ -134,9 +135,7 @@ export function CheckoutSelectedCoffees() {
                 </div>
               </div>
 
-              <span className="font-bold text-gray-800">
-                R$ {(item.price * item.quantity).toFixed(2)}
-              </span>
+             
             </div>
           ))
         )}

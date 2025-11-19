@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-title: var(--font-cormorant);
+  --font-text: var(--font-inter);
 }
 
 @theme inline {
@@ -17,6 +19,14 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-title);
+}
+
+body, p, span, input, button {
+  font-family: var(--font-text);
 }
 
 .pay-btn {

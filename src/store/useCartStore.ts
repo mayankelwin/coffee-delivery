@@ -29,7 +29,6 @@ export const useCartStore = create<CartState>()(
       paymentMethod: null,
       setPaymentMethod: (method) => set({ paymentMethod: method }),
 
-      // ADICIONAR ITEM AO CARRINHO
       addToCart: (item) => {
         const cart = get().cart;
         const exists = cart.find((c) => c.id === item.id);
@@ -47,16 +46,13 @@ export const useCartStore = create<CartState>()(
         set({ cart: [...cart, item] });
       },
 
-      // REMOVER ITEM DO CARRINHO
       removeFromCart: (id) =>
         set((state) => ({
           cart: state.cart.filter((item) => item.id !== id),
         })),
 
-      // LIMPAR CARRINHO
       clearCart: () => set({ cart: [] }),
 
-      //  ATUALIZAR QUANTIDADE
       updateQuantity: (id, quantity) =>
         set(() => {
           const validQuantity = Math.max(1, quantity);
@@ -70,7 +66,6 @@ export const useCartStore = create<CartState>()(
           };
         }),
 
-      // TOTAL DE ITENS NO HEADER
       getCartTotal: () =>
         get().cart.reduce((acc, item) => acc + item.quantity, 0),
     }),

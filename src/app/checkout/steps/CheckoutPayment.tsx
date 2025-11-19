@@ -21,7 +21,7 @@ export function CheckoutPayment() {
         O pagamento é feito na entrega. Escolha a forma de pagar.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
         {payments.map((p) => (
           <button
             key={p.id}

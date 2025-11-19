@@ -1,12 +1,16 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { MapPin, Home, Navigation, Search } from "lucide-react"
 import { Input } from "@/src/components/ui/Input"
 import { toast } from "react-toastify"
 import { useLocationStore } from "@/src/store/useLocationStore"
+import { fetchCep } from "@/src/lib/fetchCep"
 
 export function CheckoutAddressForm() {
+  const savedAddress = useLocationStore((state) => state.address)
+  const setAddress = useLocationStore((state) => state.setAddress)
+
   const [cep, setCep] = useState("")
   const [street, setStreet] = useState("")
   const [number, setNumber] = useState("")
@@ -16,7 +20,17 @@ export function CheckoutAddressForm() {
   const [uf, setUf] = useState("")
   const [loading, setLoading] = useState(false)
 
-  const setAddress = useLocationStore((state) => state.setAddress)
+  useEffect(() => {
+    if (!savedAddress) return
+
+    setCep(savedAddress.cep || "")
+    setStreet(savedAddress.street || "")
+    setNumber(savedAddress.number || "")
+    setComplement(savedAddress.complement || "")
+    setDistrict(savedAddress.district || "")
+    setCity(savedAddress.city || "")
+    setUf(savedAddress.uf || "")
+  }, [])
 
   function updateStoreAddress(custom = {}) {
     setAddress({
@@ -32,18 +46,10 @@ export function CheckoutAddressForm() {
   }
 
   async function handleSearchCep() {
-    const clean = cep.replace(/\D/g, "")
-
-    if (clean.length !== 8) {
-      toast.error("Digite um CEP válido!")
-      return
-    }
-
     setLoading(true)
 
     try {
-      const res = await fetch(`https://viacep.com.br/ws/${clean}/json/`)
-      const data = await res.json()
+      const data = await fetchCep(cep)
 
       if (data.erro) {
         toast.warn("CEP não encontrado!")
@@ -56,7 +62,7 @@ export function CheckoutAddressForm() {
       setUf(data.uf || "")
 
       updateStoreAddress({
-        cep: clean,
+        cep: cep.replace(/\D/g, ""),
         street: data.logradouro || "",
         district: data.bairro || "",
         city: data.localidade || "",
@@ -65,7 +71,6 @@ export function CheckoutAddressForm() {
 
       toast.success("Endereço encontrado!")
     } catch (err) {
-      console.log("Erro ao buscar CEP:", err)
       toast.error("Erro ao buscar CEP!")
     } finally {
       setLoading(false)
@@ -74,7 +79,6 @@ export function CheckoutAddressForm() {
 
   return (
     <div className="bg-[#F3F2F2] p-6 rounded-lg border border-gray-200">
-
       <div className="flex flex-row gap-2"> 
         <MapPin size={24} color="#C47F17" />
 
@@ -87,7 +91,6 @@ export function CheckoutAddressForm() {
       </div>
 
       <div className="grid grid-cols-1 gap-4">
-
         <div className="flex gap-3 items-center">
           <Input
             value={cep}
@@ -120,7 +123,6 @@ export function CheckoutAddressForm() {
         />
 
         <div className="flex gap-3">
-
           <Input
             value={number}
             onChange={(v) => {
@@ -144,7 +146,6 @@ export function CheckoutAddressForm() {
         </div>
 
         <div className="grid grid-cols-3 gap-3">
-
           <Input
             value={district}
             onChange={(v) => {

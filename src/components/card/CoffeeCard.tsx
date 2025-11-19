@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ShoppingCart, Minus, Plus, Trash } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCartStore } from "@/src/store/useCartStore";
+import { toast } from "react-toastify";
 
 interface CoffeeCardProps {
   id: number;
@@ -49,6 +50,16 @@ export function CoffeeCard({
         quantity,
       });
     }
+
+    toast.success(`${name} adicionado ao carrinho!`, {
+      position: "top-left",
+      toastId: `added-${id}`, 
+      style: {
+        fontSize: "14px",
+        fontWeight: "600",
+        textAlign: "center",
+      },
+    });
   }
 
   function handleRemove() {

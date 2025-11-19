@@ -1,13 +1,24 @@
+"use client";
+
 import Image from "next/image";
 import Imagem from "@/public/svg/Imagem.svg";
 import { ShoppingCart, Package, Timer, Coffee } from "lucide-react";
+import { useProfileStore } from "@/src/store/useProfileStore";
 
 export function HeroSection() {
+  const { username } = useProfileStore();
+
+  const firstName = username ? username.split(" ")[0] : "";
   return (
     <div className="text-black flex flex-col-reverse lg:flex-row items-center justify-between mt-20 gap-10 mb-24 ">
       
-      {/* TEXTO */}
       <div className="max-w-xl text-center md:text-left">
+        {username && (
+          <h2 className="text-violet-500 text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-snug sm:leading-tight">
+            Olá, {firstName}!
+          </h2>
+        )}
+
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-snug sm:leading-tight">
           Encontre o café perfeito <br /> para qualquer hora do dia
         </h2>
@@ -18,7 +29,6 @@ export function HeroSection() {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 text-sm">
-          {/* 1 */}
           <div className="flex items-center gap-3">
             <div className="bg-[#C47F17] text-white p-2 rounded-full">
               <ShoppingCart size={18} />
@@ -26,7 +36,6 @@ export function HeroSection() {
             <span>Compra simples e segura</span>
           </div>
 
-          {/* 2 */}
           <div className="flex items-center gap-3">
             <div className="bg-[#574F4D] text-white p-2 rounded-full">
               <Package size={18} />
@@ -34,7 +43,6 @@ export function HeroSection() {
             <span>Embalagem mantém o café intacto</span>
           </div>
 
-          {/* 3 */}
           <div className="flex items-center gap-3">
             <div className="bg-[#DBAC2C] text-white p-2 rounded-full">
               <Timer size={18} />
@@ -42,7 +50,6 @@ export function HeroSection() {
             <span>Entrega rápida e rastreada</span>
           </div>
 
-          {/* 4 */}
           <div className="flex items-center gap-3">
             <div className="bg-[#4B2995] text-white p-2 rounded-full">
               <Coffee size={18} />
@@ -52,7 +59,6 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* IMAGEM */}
       <div className="w-full max-w-md md:max-w-none flex justify-center lg:justify-end mb-8 md:mb-0">
         <Image
           priority

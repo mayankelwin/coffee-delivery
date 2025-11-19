@@ -3,26 +3,32 @@
 import Image from "next/image";
 import Logo from "@/public/svg/Logo.svg";
 import { useState, useEffect } from "react";
-import { ShoppingCart } from "lucide-react";
+import { CircleUserRound, ShoppingCart } from "lucide-react";
 import { getBrazilUf } from "@/src/lib/ApiIBGE";
 import { useLocationStore } from "@/src/store/useLocationStore";
 import { useCartStore } from "@/src/store/useCartStore";
+import { useProfileStore } from "@/src/store/useProfileStore";
 import { useRouter } from "next/navigation";
-import { LoadingDots } from "../ui/LoadingDots";
 
 export function HeaderGlobal() {
   const router = useRouter();
 
-  // HOOKS — sempre no topo
   const [isOpen, setIsOpen] = useState(false);
   const [states, setStates] = useState([]);
   const [scrolled, setScrolled] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const setSelectedCity = useLocationStore((state) => state.setSelectedCity);
   const cartTotal = useCartStore((state) => state.getCartTotal());
 
-  // Effects — sempre depois dos hooks
+  const { username, avatar } = useProfileStore();
+
+  const firstName = username ? username.split(" ")[0] : "";
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     async function loadUF() {
       const uf = await getBrazilUf();
@@ -38,27 +44,24 @@ export function HeaderGlobal() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Agora pode fazer returns
-  function handleCheckout() {
-    setIsLoading(true);
-
+  const handleCheckout = () => {
     setTimeout(() => {
       router.push("/checkout");
     }, 300);
-  }
+  };
 
-  if (isLoading) {
-    return <LoadingDots fullScreen />;
-  }
+  const handlePerfil = () => {
+    setTimeout(() => {
+      router.push("/profile");
+    }, 300);
+  };
 
   return (
     <>
       <header
-        className={`
-          fixed top-0 left-0 w-full z-50
-          transition-all duration-300
-          ${scrolled ? "backdrop-blur-md bg-white/60 shadow-md" : "bg-transparent"}
-        `}
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          scrolled ? "backdrop-blur-md bg-white/60 shadow-md" : "bg-transparent"
+        }`}
       >
         <div className="w-full flex items-center justify-between px-4 sm:px-6 md:px-12 lg:px-20 py-3 sm:py-4 md:py-6">
           <Image
@@ -70,7 +73,7 @@ export function HeaderGlobal() {
             className="h-auto"
           />
 
-          <div className="flex gap-2 sm:gap-3">
+          <div className="flex gap-2 sm:gap-3 items-center">
             <button
               onClick={handleCheckout}
               className="
@@ -85,7 +88,7 @@ export function HeaderGlobal() {
               <ShoppingCart size={16} className="sm:hidden" />
               <ShoppingCart size={18} className="hidden sm:block" />
 
-              {cartTotal > 0 && (
+              {mounted && cartTotal > 0 && (
                 <span
                   className="
                     absolute -top-2 -right-2
@@ -96,6 +99,34 @@ export function HeaderGlobal() {
                 >
                   {cartTotal}
                 </span>
+              )}
+            </button>
+
+            <button
+              onClick={handlePerfil}
+              className="
+                relative flex items-center gap-2 border
+                text-black hover:text-white
+                border-[#8f009c] hover:bg-[#b503c5]
+                p-2
+                rounded-full transition
+                cursor-pointer
+              "
+            >
+              {firstName && (
+                <span className="hidden sm:inline  font-semibold text-sm">
+                  {firstName}
+                </span>
+              )}
+
+              {avatar ? (
+                <img
+                  src={avatar}
+                  alt="Avatar"
+                  className="w-8 h-8 rounded-full object-cover"
+                />
+              ) : (
+                <CircleUserRound size={24} className="text-[#C47F17]" />
               )}
             </button>
           </div>

@@ -16,7 +16,8 @@ interface InputProps {
   variant?: "default" | "filled" | "outlined" | "light"
   size?: "sm" | "md" | "lg"
   showPasswordToggle?: boolean 
-  allowNegative?: boolean 
+  allowNegative?: boolean
+  maxLength?: number
 }
 
 export function Input({ 
@@ -34,6 +35,7 @@ export function Input({
   size = "md",
   showPasswordToggle = false,
   allowNegative = false,
+  maxLength
 }: InputProps) {
   const [isFocused, setIsFocused] = useState(false)
   const [isFilled, setIsFilled] = useState(false)
