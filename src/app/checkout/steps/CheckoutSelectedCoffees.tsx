@@ -166,7 +166,7 @@ export function CheckoutSelectedCoffees() {
         onClick={handleButtonClick}
         disabled={!isEmpty && !canConfirm}
         className={`
-          w-full mt-6 text-white font-bold py-3 rounded-md transition
+          w-full mt-6 text-white font-bold py-3 rounded-md transition rounded-tr-[44px] rounded-bl-[44px]
           ${
             isEmpty
               ? "bg-purple-600 hover:bg-purple-700 cursor-pointer"
