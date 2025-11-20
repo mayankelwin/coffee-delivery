@@ -1,18 +1,21 @@
-"use client"
+"use client";
 
-import { CreditCard, Landmark, Wallet } from "lucide-react"
-import { useCartStore } from "@/src/store/useCartStore"
+import { CreditCard, Landmark, Wallet } from "lucide-react";
+import { useCartStore } from "@/src/store/useCartStore";
+import { JSX } from "react";
+
+type PaymentMethod = "credit" | "debit" | "money" | "pix";
 
 export function CheckoutPayment() {
-  const paymentMethod = useCartStore((state) => state.paymentMethod)
-  const setPaymentMethod = useCartStore((state) => state.setPaymentMethod)
+  const paymentMethod = useCartStore((state) => state.paymentMethod);
+  const setPaymentMethod = useCartStore((state) => state.setPaymentMethod);
 
-  const payments = [
+  const payments: { id: PaymentMethod; label: string; icon: JSX.Element }[] = [
     { id: "credit", label: "Cartão de Crédito", icon: <CreditCard size={18} /> },
     { id: "debit", label: "Cartão de Débito", icon: <Landmark size={18} /> },
     { id: "money", label: "Dinheiro", icon: <Wallet size={18} /> },
     { id: "pix", label: "PIX", icon: <Wallet size={18} /> },
-  ]
+  ];
 
   return (
     <div className="bg-[#F3F2F2] p-6 rounded-lg border border-gray-200 mt-6">
@@ -25,7 +28,7 @@ export function CheckoutPayment() {
         {payments.map((p) => (
           <button
             key={p.id}
-            onClick={() => setPaymentMethod(p.id as any)}
+            onClick={() => setPaymentMethod(p.id)}
             className={`
               flex items-center justify-center gap-2 py-3 px-4 rounded-lg 
               font-medium text-sm uppercase transition-all cursor-pointer
@@ -41,5 +44,5 @@ export function CheckoutPayment() {
         ))}
       </div>
     </div>
-  )
+  );
 }

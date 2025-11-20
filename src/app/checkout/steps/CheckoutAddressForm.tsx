@@ -21,16 +21,18 @@ export function CheckoutAddressForm() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (!savedAddress) return
+    if (!savedAddress) return;
 
-    setCep(savedAddress.cep || "")
-    setStreet(savedAddress.street || "")
-    setNumber(savedAddress.number || "")
-    setComplement(savedAddress.complement || "")
-    setDistrict(savedAddress.district || "")
-    setCity(savedAddress.city || "")
-    setUf(savedAddress.uf || "")
-  }, [])
+    setCep(savedAddress.cep || "");
+    setStreet(savedAddress.street || "");
+    setNumber(savedAddress.number || "");
+    setComplement(savedAddress.complement || "");
+    setDistrict(savedAddress.district || "");
+    setCity(savedAddress.city || "");
+    setUf(savedAddress.uf || "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
 
   function updateStoreAddress(custom = {}) {
     setAddress({
@@ -70,7 +72,8 @@ export function CheckoutAddressForm() {
       })
 
       toast.success("Endereço encontrado!")
-    } catch (err) {
+
+    } catch {
       toast.error("Erro ao buscar CEP!")
     } finally {
       setLoading(false)

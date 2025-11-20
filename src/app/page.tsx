@@ -35,53 +35,28 @@ export default function Home() {
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Site Seguro</h3>
               <div className="flex items-center gap-3">
                 <Image
-                  src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
+                  src="https://cdn-icons-png.flaticon.com/512/942/942748.png"
                   alt="SSL Seguro"
                   width={50}
                   height={50}
                 />
 
                 <Image
-                  src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
+                  src="https://cdn-icons-png.flaticon.com/512/891/891399.png"
                   alt="Protegido"
                   width={50}
                   height={50}
                 />
 
                 <Image
-                  src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png"
+                  src="https://cdn-icons-png.flaticon.com/512/1040/1040230.png"
                   alt="Site Verificado"
                   width={50}
                   height={50}
                 />
               </div>
             </div>
-
-            <div className="flex flex-col items-center md:items-end">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Formas de Pagamento</h3>
-              <div className="flex items-center gap-3">
-                <Image
-                  src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png"
-                  alt="Visa"
-                  width={45}
-                  height={45}
-                />
-                <Image
-                  src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
-                  alt="Mastercard"
-                  width={45}
-                  height={45}
-                />
-
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/0/04/Logo_do_PIX.svg"
-                  alt="Pix"
-                  width="45"
-                />
-              </div>
-            </div>
           </div>
-
           <div className="text-center text-gray-500 text-sm mt-10">
             © {new Date().getFullYear()} • Criado por Mayan Kelwin — Todos os direitos reservados.
           </div>

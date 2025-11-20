@@ -5,7 +5,7 @@ export const coffees = [
     description: "O tradicional café feito com água quente e grãos moídos.",
     tags: ["Tradicional"],
     price: 9.9,
-    image: "/svg/coffees/expresso.svg",
+    image: "/svg/coffees/Expresso.svg",
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ export const coffees = [
     description: "Café expresso tradicional com espuma cremosa.",
     tags: ["Tradicional"],
     price: 9.9,
-    image: "/svg/coffees/expressocremoso.svg",
+    image: "/svg/coffees/ExpressoCremoso.svg",
   },
   {
     id: 4,

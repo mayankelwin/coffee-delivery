@@ -6,7 +6,7 @@ import { useLocationStore } from "@/src/store/useLocationStore";
 import { useCartStore } from "@/src/store/useCartStore";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { LoadingDots } from "@/src/components/ui/LoadingDots";
 
 
@@ -14,7 +14,7 @@ export default function CheckoutSuccess() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { address, resetLocation } = useLocationStore();
+  const { address } = useLocationStore();
   const { cart, paymentMethod, clearCart } = useCartStore();
 
   const isValid =

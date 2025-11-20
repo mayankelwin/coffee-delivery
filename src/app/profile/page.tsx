@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { HeaderGlobal } from "@/src/components/layout/HeaderGlobal";
 import { Input } from "@/src/components/ui/Input";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -61,7 +62,12 @@ export default function ProfilePage() {
                 <div className="relative">
                   <div className="w-32 h-32 rounded-full overflow-hidden bg-white border-4 border-white shadow-lg">
                     {avatar ? (
-                      <img src={avatar} alt="Avatar" className="w-full h-full object-cover" />
+                      <Image
+                        src={avatar}
+                        alt="Avatar"
+                        fill
+                        className="object-cover"
+                      />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
                         <User size={48} className="text-purple-400" />

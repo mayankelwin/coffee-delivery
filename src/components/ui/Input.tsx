@@ -1,12 +1,12 @@
 "use client"
-import { useState, useRef, useEffect, useCallback } from "react"
+import { useState, useRef, useEffect } from "react"
 import { LucideEye, LucideEyeClosed } from "lucide-react"
 
 interface InputProps {
   label?: string
   value: string
   onChange: (value: string) => void
-  type?: "text" | "email" | "password" | "number" | "tel" | "money" 
+  type?: "text" | "email" | "password" | "number" | "tel" | "money"
   icon?: React.ReactNode
   required?: boolean
   placeholder?: string
@@ -20,13 +20,13 @@ interface InputProps {
   maxLength?: number
 }
 
-export function Input({ 
-  label, 
-  type = "text", 
-  value, 
-  onChange, 
-  required = false, 
-  icon, 
+export function Input({
+  label,
+  type = "text",
+  value,
+  onChange,
+  required = false,
+  icon,
   placeholder,
   disabled = false,
   error,
@@ -37,6 +37,7 @@ export function Input({
   allowNegative = false,
   maxLength
 }: InputProps) {
+  
   const [isFocused, setIsFocused] = useState(false)
   const [isFilled, setIsFilled] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
@@ -48,11 +49,14 @@ export function Input({
 
   const handleFocus = () => setIsFocused(true)
   const handleBlur = () => setIsFocused(false)
+  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (type === "money") {
       const onlyNumbers = e.target.value.replace(/\D/g, "")
-      onChange(onlyNumbers ? parseInt(onlyNumbers) : 0)
-    } 
+      const numeric = Number(onlyNumbers || "0");
+      onChange(String(numeric));
+
+    }
     else if (type === "number") {
       let val = e.target.value
 
@@ -61,12 +65,11 @@ export function Input({
       }
 
       onChange(val)
-    } 
+    }
     else {
       onChange(e.target.value)
     }
   }
-
 
   const sizeClasses = {
     sm: "px-3 py-2 text-sm",
@@ -81,33 +84,31 @@ export function Input({
     light: "bg-[#EDEDED] border border-gray-100 text-gray-900 focus:bg-white"
   }
 
-
-  const stateClasses = error 
-    ? "border-red-500 focus:ring-red-500/20 focus:border-red-500" 
-    : success 
+  const stateClasses = error
+    ? "border-red-500 focus:ring-red-500/20 focus:border-red-500"
+    : success
     ? "border-green-500 focus:ring-green-500/20 focus:border-green-500"
-    : isFocused 
+    : isFocused
     ? "border-blue-500 focus:ring-blue-500/20 focus:border-blue-500 shadow-lg shadow-blue-500/10"
     : "border-gray-600 focus:ring-blue-500/20 focus:border-blue-500"
 
-  const iconColor = error 
-    ? "text-red-400" 
-    : success 
+  const iconColor = error
+    ? "text-red-400"
+    : success
     ? "text-green-400"
-    : isFocused 
+    : isFocused
     ? "text-blue-400"
     : "text-gray-400"
 
   const inputType = showPasswordToggle && showPassword ? "text" : type
-    // Transforma centavos -> moeda
-    function formatCentsToCurrency(value: number) {
-      return (value / 100).toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      })
-    }
 
-    // Transforma string digitada -> centavos
+  function formatCentsToCurrency(value: number) {
+    return (value / 100).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    })
+  }
+
   function parseCurrencyToCents(value: string) {
     const numeric = value.replace(/\D/g, "")
     return Number(numeric || "0")
@@ -116,7 +117,7 @@ export function Input({
   return (
     <div className="w-full space-y-2 relative">
       {label && (
-        <label 
+        <label
           className={`block text-sm font-medium transition-all duration-300 
             ${error ? "text-red-400" : success ? "text-green-400" : "text-black"}
             ${isFocused || isFilled ? "translate-x-1 scale-105" : ""}
@@ -129,7 +130,7 @@ export function Input({
 
       <div className="relative">
         {icon && (
-          <div 
+          <div
             className={`absolute top-1/2 left-4 -translate-y-1/2 z-10 ${iconColor} ${isFocused ? "scale-110" : ""} ${disabled ? "opacity-50" : ""}`}
           >
             {icon}
@@ -139,20 +140,22 @@ export function Input({
         <input
           ref={inputRef}
           type={inputType}
+          maxLength={maxLength} 
           value={type === "money" ? formatCentsToCurrency(Number(value)) : value}
           onChange={(e) => {
             if (type === "money") {
               const cents = parseCurrencyToCents(e.target.value)
-              onChange(String(cents)) 
+              onChange(String(cents))
             } else {
               handleInputChange(e)
-            }}}
+            }
+          }}
           onFocus={handleFocus}
           onBlur={handleBlur}
           required={required}
           disabled={disabled}
           placeholder={placeholder}
-          className={`w-full rounded-2xl  transition-all duration-300 
+          className={`w-full rounded-2xl transition-all duration-300 
             focus:outline-none focus:ring-4 placeholder-gray-500
             ${variant === "light" ? "text-gray-900" : "text-white"}
             backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed
@@ -163,9 +166,8 @@ export function Input({
             transform-gpu
             ${isFocused ? "scale-[1.02]" : "scale-100"}
           `}
-         />
+        />
 
-        {/* Botão para mostrar/ocultar senha */}
         {showPasswordToggle && type === "password" && (
           <button
             type="button"

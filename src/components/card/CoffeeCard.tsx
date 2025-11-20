@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 interface CoffeeCardProps {
   id: number;
   name: string;
-  description: string[];
+  description: string;
   tags: string[];
   price: number;
   image: string;

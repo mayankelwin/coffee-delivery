@@ -4,7 +4,7 @@ import Image from "next/image";
 import Logo from "@/public/svg/Logo.svg";
 import { useState, useEffect } from "react";
 import { CircleUserRound, ShoppingCart } from "lucide-react";
-import { getBrazilUf } from "@/src/lib/ApiIBGE";
+import { getBrazilUf, Uf } from "@/src/lib/ApiIBGE";
 import { useLocationStore } from "@/src/store/useLocationStore";
 import { useCartStore } from "@/src/store/useCartStore";
 import { useProfileStore } from "@/src/store/useProfileStore";
@@ -14,7 +14,7 @@ export function HeaderGlobal() {
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [states, setStates] = useState([]);
+  const [states, setStates] = useState<Uf[]>([]);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -120,9 +120,11 @@ export function HeaderGlobal() {
               )}
 
               {avatar ? (
-                <img
+                <Image
                   src={avatar}
                   alt="Avatar"
+                  width={32}
+                  height={32}
                   className="w-8 h-8 rounded-full object-cover"
                 />
               ) : (
@@ -143,7 +145,7 @@ export function HeaderGlobal() {
             </h2>
 
             <div className="flex flex-col gap-2 max-h-64 overflow-y-auto">
-              {states.map((item: any) => (
+              {states.map((item) => (
                 <button
                   key={item.sigla}
                   onClick={() => {
