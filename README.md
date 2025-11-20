@@ -9,13 +9,13 @@ O usuário pode navegar pelos cafés, adicionar itens ao carrinho, preencher end
 ## 📸 Preview
 
 ### 🏠 Home
-![Home](./public/images/home.png)
+![Home](./docs/images/home.png)
 
 ### 📦 Lista de Cafés
-![Lista de Cafés](./public/images/lista-cafes.png)
+![Lista de Cafés](./docs/images/lista-cafes.png)
 
 ### 🧾 Checkout Completo
-![Checkout](./public/images/checkout.png)
+![Checkout](./docs/images/checkout.png)
 
 ---
 
