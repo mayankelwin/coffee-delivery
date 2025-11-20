@@ -17,8 +17,6 @@ O usuário pode navegar pelos cafés, adicionar itens ao carrinho, preencher end
 ### 🧾 Checkout Completo
 ![Checkout](./public/images/checkout.png)
 
-> Substitua as imagens pelos caminhos reais do seu projeto.
-
 ---
 
 ## 🚀 Tecnologias Utilizadas
