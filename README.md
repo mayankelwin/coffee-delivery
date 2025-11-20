@@ -1,4 +1,3 @@
-```markdown
 # ☕ Coffee Delivery – Next.js + TypeScript
 
 Um sistema completo de delivery de café desenvolvido com **Next.js**, focado em performance, experiência do usuário e fluxo real de compra.  
