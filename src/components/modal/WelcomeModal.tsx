@@ -84,7 +84,7 @@ export function WelcomeModal() {
 
                     <button
                       onClick={handleClose}
-                      className="text-gray-400 hover:text-gray-600 transition-colors p-1 hover:bg-gray-100 rounded"
+                      className="text-gray-400 hover:text-gray-600 transition-colors p-1 hover:bg-gray-100 rounded cursor-pointer"
                     >
                       <X size={18} />
                     </button>
@@ -175,7 +175,7 @@ export function WelcomeModal() {
                     <button
                       onClick={handleContinue}
                       disabled={isContinueDisabled}
-                      className={`w-full py-3 px-6 rounded-sm font-medium text-white transition-all duration-300 flex items-center justify-center gap-2 ${
+                      className={`w-full py-3 px-6 rounded-sm font-medium text-white transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
                         isContinueDisabled
                           ? "bg-gray-300 cursor-not-allowed text-gray-500"
                           : "bg-gray-900 hover:bg-gray-800 shadow-md hover:shadow-lg transform hover:scale-[1.02]"
@@ -187,7 +187,7 @@ export function WelcomeModal() {
                   ) : (
                     <button
                       onClick={handleClose}
-                      className="w-full py-3 px-6 rounded-sm font-medium text-white bg-gray-900 hover:bg-gray-800 transition-all shadow-md hover:shadow-lg"
+                      className="w-full py-3 px-6 rounded-sm font-medium text-white bg-gray-900 hover:bg-gray-800 transition-all shadow-md hover:shadow-lg cursor-pointer"
                     >
                       Fechar
                     </button>
