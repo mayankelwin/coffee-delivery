@@ -165,7 +165,7 @@ export function WelcomeModal() {
 
                       <div className="bg-blue-50 border border-blue-200 rounded-sm p-3 mb-6">
                         <p className="text-blue-700 text-xs text-center leading-relaxed">
-                          💡 <strong>Importante:</strong> Este é um site demonstrativo para portfólio. Nenhum produto é comercializado de verdade.
+                          <strong>Importante:</strong> Este é um site demonstrativo para portfólio. Nenhum produto é comercializado de verdade.
                         </p>
                       </div>
                     </>
