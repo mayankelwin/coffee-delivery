@@ -1,5 +1,7 @@
 # ☕ Coffee Delivery – Next.js + TypeScript
 
+[![Acessar Coffee Delivery](https://img.shields.io/badge/Acessar-ZERO%20CONTAS-0f172a?style=for-the-badge&logo=vercel&logoColor=white)](https://coffee-delivery-theta-henna.vercel.app/)
+
 Um sistema completo de delivery de café desenvolvido com **Next.js**, focado em performance, experiência do usuário e fluxo real de compra.  
 O usuário pode navegar pelos cafés, adicionar itens ao carrinho, preencher endereço usando busca automática por **CEP**, escolher forma de pagamento e finalizar o pedido.
 
